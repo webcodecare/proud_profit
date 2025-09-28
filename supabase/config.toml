@@ -1,0 +1,49 @@
+[api]
+enabled = true
+port = 54321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[auth]
+enabled = true
+site_url = "http://localhost:1000"
+additional_redirect_urls = ["https://proud-profit.vercel.app"]
+jwt_expiry = 3600
+refresh_token_rotation_enabled = true
+security_captcha_enabled = false
+security_captcha_provider = "hcaptcha"
+
+[auth.email]
+enable_signup = true
+double_confirm_changes = true
+enable_confirmations = false
+
+[auth.sms]
+enable_signup = false
+enable_confirmations = false
+
+[realtime]
+enabled = true
+
+[storage]
+enabled = true
+file_size_limit = "50MiB"
+allowed_mime_types = ["image/png", "image/jpeg", "image/gif", "image/webp"]
+
+[edge_functions]
+enabled = true
+
+[functions.tradingview-webhook]
+verify_jwt = false
+
+[functions.scheduled-notifications]
+verify_jwt = false
+
+[functions.market-data-sync]
+verify_jwt = false
+
+# Cron configuration for scheduled Edge Functions
+[cron]
+"market-data-sync" = "*/5 * * * *"  # Every 5 minutes
+"scheduled-notifications" = "*/10 * * * *"  # Every 10 minutes
